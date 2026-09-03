@@ -119,4 +119,4 @@ This project demonstrates core Object-Oriented Programming principles in Java â€
 
 ---
 
-## ðŸ”— Composition Relationships (UML-style summary)
+
