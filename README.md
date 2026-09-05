@@ -1,82 +1,145 @@
 # ⚽ Soccer League System
 
-A Java-based Object-Oriented Programming project that simulates a simple soccer league system.
+A Java-based **Object-Oriented Programming (OOP)** project that models a soccer league, manages teams and players, records match goals, and generates league standings based on match results.
 
-The system manages teams, players, matches, and goals while calculating team statistics, points, goal difference, and league standings.
+---
 
-## 📌 Project Overview
+## 📌 Overview
 
-The **Soccer League System** demonstrates the main concepts of **Object-Oriented Programming (OOP)** in Java.
+The **Soccer League System** is designed to represent the core structure of a simple soccer league using Java classes and object relationships.
 
-The system represents a soccer league consisting of multiple teams and matches. It records match results, tracks goal scorers and scoring minutes, updates team statistics, and generates a ranked league standings table.
+The system manages:
 
-The project uses exactly five main classes:
+* Teams and their players
+* Soccer matches
+* Goals and goal scorers
+* Match results
+* Team statistics
+* League points
+* Goal difference
+* League standings
+* Detailed match information
 
-* `Player`
-* `Team`
-* `Goal`
-* `Match`
-* `Schedule`
-
-## 🎯 Project Objectives
-
-The main objectives of this project are:
-
-* Apply Object-Oriented Programming principles in Java.
-* Model a soccer league using classes and objects.
-* Demonstrate composition between related classes.
-* Manage collections using `ArrayList`.
-* Store teams and their players.
-* Store matches and their goals.
-* Calculate team points.
-* Calculate goals for and goals against.
-* Calculate goal difference.
-* Rank teams based on their performance.
-* Display detailed match information.
-* Display the final league standings.
-
-## 🏗️ System Design
+The project was developed as an **Object-Oriented Programming assignment** using exactly five main classes:
 
 ```text
-                    ┌───────────────┐
-                    │    Schedule   │
-                    └───────┬───────┘
-                            │
-                ┌───────────┴───────────┐
-                │                       │
-                ▼                       ▼
-        ┌───────────────┐       ┌───────────────┐
-        │     Team      │       │     Match     │
-        └───────┬───────┘       └───────┬───────┘
-                │                       │
-                ▼                       ▼
-        ┌───────────────┐       ┌───────────────┐
-        │    Player     │       │      Goal      │
-        └───────────────┘       └───────┬───────┘
-                                        │
-                                        ▼
-                                   ┌──────────┐
-                                   │  Player  │
-                                   └──────────┘
+Player
+Team
+Goal
+Match
+Schedule
 ```
 
-## 📦 Classes
+---
 
-### 1. Player
+## ✨ Features
 
-Represents a soccer player who belongs to a team.
+* ⚽ Manage soccer teams
+* 👤 Manage players belonging to each team
+* 🏟️ Manage matches between two teams
+* 🥅 Record goals scored during matches
+* ⏱️ Store the minute of each goal
+* 👤 Identify the player who scored each goal
+* 📊 Track Goals For and Goals Against
+* 🏆 Calculate team points
+* 📈 Calculate Goal Difference
+* 🥇 Rank teams in the league
+* 📋 Display league standings
+* 📝 Display detailed match results
 
-**Responsibilities:**
+---
+
+## 🏗️ Architecture Diagram
+
+```text
+                         ⚽ SOCCER LEAGUE SYSTEM
+                                  |
+                                  v
+                         +-----------------+
+                         |    Schedule     |
+                         |-----------------|
+                         | Teams           |
+                         | Matches         |
+                         | Statistics      |
+                         | Ranking         |
+                         | Display Results |
+                         +--------+--------+
+                                  |
+                    +-------------+-------------+
+                    |                           |
+                    v                           v
+             +-------------+             +-------------+
+             |    Team     |             |    Match    |
+             |-------------|             |-------------|
+             | nameTeam    |             | matchId     |
+             | players     |             | homeTeam    |
+             | goalsFor    |             | awayTeam    |
+             | goalsAgainst|             | goals       |
+             | points      |             +------+------+
+             +------+------+                    |
+                    |                           |
+                    v                           v
+             +-------------+             +-------------+
+             |   Player    |             |    Goal     |
+             |-------------|             |-------------|
+             | Player Data |<------------| matchId     |
+             +-------------+    scorer   | scorer      |
+                                         | minute      |
+                                         +-------------+
+```
+
+---
+
+## 🔗 Class Relationships
+
+```text
+Schedule
+|
++-- ArrayList<Team>
+|       |
+|       +-- ArrayList<Player>
+|
++-- ArrayList<Match>
+        |
+        +-- Team homeTeam
+        +-- Team awayTeam
+        |
+        +-- ArrayList<Goal>
+                |
+                +-- Player scorer
+```
+
+### Relationship Summary
+
+| Class      | Contains                                 |
+| ---------- | ---------------------------------------- |
+| `Schedule` | `ArrayList<Team>` and `ArrayList<Match>` |
+| `Team`     | `ArrayList<Player>`                      |
+| `Match`    | Two `Team` objects and `ArrayList<Goal>` |
+| `Goal`     | A `Player` object as the scorer          |
+| `Player`   | Player information                       |
+
+---
+
+# 📦 Class Design
+
+## 👤 Player
+
+The `Player` class represents a soccer player participating in the league.
+
+### Responsibilities
 
 * Store player information.
-* Represent a player inside a team.
-* Identify the player who scored a goal.
+* Represent players belonging to a team.
+* Identify the player responsible for scoring a goal.
 
-### 2. Team
+---
 
-Represents a soccer team participating in the league.
+## 🏟️ Team
 
-**Main Attributes:**
+The `Team` class represents a soccer team participating in the league.
+
+### Attributes
 
 ```java
 private String nameTeam;
@@ -86,18 +149,20 @@ private int goalsAgainst;
 private int points;
 ```
 
-The `Team` class contains an `ArrayList<Player>` representing the players belonging to the team.
+### Responsibilities
 
-It also stores:
+* Store the team name.
+* Store the team's players.
+* Track goals scored.
+* Track goals conceded.
+* Track league points.
+* Add players to the team.
 
-* Goals For
-* Goals Against
-* Points
-
-**Main Methods:**
+### Main Methods
 
 ```java
 Team(...)
+
 getNameTeam()
 getPlayers()
 getGoalsFor()
@@ -113,20 +178,23 @@ setPoints(...)
 addPlayer(...)
 ```
 
-**Composition:**
+### Composition
 
 ```text
 Team
- └── ArrayList<Player>
+ |
+ +-- ArrayList<Player>
 ```
 
 A team contains multiple players.
 
-### 3. Goal
+---
 
-Represents a goal scored during a match.
+## 🥅 Goal
 
-**Main Attributes:**
+The `Goal` class represents a goal scored during a match.
+
+### Attributes
 
 ```java
 private int matchId;
@@ -134,24 +202,27 @@ private Player scorer;
 private int minute;
 ```
 
-**Responsibilities:**
+### Responsibilities
 
 * Store the match identifier.
 * Store the player who scored.
-* Store the minute of the goal.
+* Store the minute at which the goal was scored.
 
-**Composition:**
+### Composition
 
 ```text
 Goal
- └── Player
+ |
+ +-- Player scorer
 ```
 
-### 4. Match
+---
 
-Represents a soccer match between two teams.
+## 🏟️ Match
 
-**Main Attributes:**
+The `Match` class represents a soccer match between two teams.
+
+### Attributes
 
 ```java
 private int matchId;
@@ -160,138 +231,64 @@ private Team awayTeam;
 private ArrayList<Goal> goals;
 ```
 
-**Responsibilities:**
+### Responsibilities
 
 * Store the match identifier.
 * Store the home team.
 * Store the away team.
-* Store all goals scored during the match.
-* Display match information.
+* Store the goals scored during the match.
 
-**Composition:**
+### Composition
 
 ```text
 Match
- ├── Team homeTeam
- ├── Team awayTeam
- └── ArrayList<Goal>
+ |
+ +-- Team homeTeam
+ +-- Team awayTeam
+ +-- ArrayList<Goal>
 ```
 
-### 5. Schedule
+---
+
+## 📅 Schedule
 
 The `Schedule` class manages the complete soccer league.
 
-**Main Attributes:**
+### Attributes
 
 ```java
 private ArrayList<Team> teams;
 private ArrayList<Match> matches;
 ```
 
-**Responsibilities:**
+### Responsibilities
 
 * Store all league teams.
 * Store all league matches.
 * Process match results.
 * Update team statistics.
-* Calculate points.
-* Calculate goals for and against.
+* Update team points.
 * Calculate goal difference.
 * Rank teams.
 * Display the standings table.
 * Display detailed match information.
 
-**Composition:**
+### Composition
 
 ```text
 Schedule
- ├── ArrayList<Team>
- └── ArrayList<Match>
+ |
+ +-- ArrayList<Team>
+ +-- ArrayList<Match>
 ```
 
-## ⚽ Points System
+---
 
-The system uses the standard soccer points system:
+# 🧠 Object-Oriented Programming Concepts
 
-| Result | Points |
-| ------ | ------ |
-| Win    | 3      |
-| Draw   | 1      |
-| Loss   | 0      |
+## Encapsulation
 
-## 📊 Team Statistics
-
-The system tracks:
-
-* **Goals For:** Total goals scored by the team.
-* **Goals Against:** Total goals conceded by the team.
-* **Goal Difference:** Goals For - Goals Against.
-* **Points:** Points earned from match results.
-
-```text
-Goal Difference = Goals For - Goals Against
-```
-
-## 🏆 League Standings
-
-After processing the matches, the system generates a ranked standings table.
-
-Example:
-
-```text
-===== Soccer League Standings =====
-
-Team          Points    Goals For    Goals Against    Goal Difference
-Ahly          9         6            2                4
-Zamalek       6         5            3                2
-Pyramids      6         3            3                0
-Ismaily       3         1            1                0
-Masry         0         2            4                -2
-Future        0         1            5                -4
-```
-
-## 📝 Match Details
-
-The system displays detailed information about each match, including the teams, score, goal scorers, and the minute of every goal.
-
-Example:
-
-```text
-===== Match Details =====
-
-Match #1: Ahly 2 - 1 Zamalek
-
-Mahmoud (Ahly) - 15'
-Mohamed (Ahly) - 60'
-Hashim (Zamalek) - 78'
-```
-
-## ⚽ Example Matches
-
-```text
-Match #1: Ahly 2 - 1 Zamalek
-Match #2: Pyramids 2 - 1 Masry
-Match #3: Ismaily 1 - 0 Future
-Match #4: Ahly 2 - 0 Pyramids
-Match #5: Zamalek 2 - 1 Masry
-Match #6: Future 1 - 2 Ahly
-Match #7: Ismaily 0 - 1 Pyramids
-Match #8: Zamalek 2 - 0 Future
-```
-
-## 💻 Technologies Used
-
-* **Java**
-* **Object-Oriented Programming**
-* **ArrayList**
-* **Maven**
-* **Apache NetBeans**
-
-## 🧠 OOP Concepts Demonstrated
-
-### Encapsulation
-
-Class attributes are declared as `private` and accessed through getters and setters.
+The project uses `private` attributes and public getters and setters to control access to object data.
 
 Example:
 
@@ -307,27 +304,148 @@ public void setNameTeam(String nameTeam) {
 }
 ```
 
-### Composition
+This keeps the internal state of the object protected while allowing controlled access.
 
-Objects are used as attributes inside other classes.
+---
+
+## Composition
+
+The project uses composition to represent relationships between objects.
 
 ```text
 Team
- └── ArrayList<Player>
+ |
+ +-- ArrayList<Player>
 
 Match
- ├── Team
- └── ArrayList<Goal>
+ |
+ +-- Team homeTeam
+ +-- Team awayTeam
+ +-- ArrayList<Goal>
 
 Goal
- └── Player
+ |
+ +-- Player scorer
 
 Schedule
- ├── ArrayList<Team>
- └── ArrayList<Match>
+ |
+ +-- ArrayList<Team>
+ +-- ArrayList<Match>
 ```
 
-## 📁 Project Structure
+---
+
+# ⚽ Points System
+
+The league follows the standard soccer points system:
+
+| Match Result | Points |
+| ------------ | -----: |
+| Win          |      3 |
+| Draw         |      1 |
+| Loss         |      0 |
+
+---
+
+# 📊 League Statistics
+
+The system tracks the following statistics for each team:
+
+| Statistic       | Description                      |
+| --------------- | -------------------------------- |
+| Goals For       | Total goals scored by the team   |
+| Goals Against   | Total goals conceded by the team |
+| Goal Difference | Goals For - Goals Against        |
+| Points          | Points earned from match results |
+
+### Goal Difference
+
+```text
+Goal Difference = Goals For - Goals Against
+```
+
+---
+
+# ⚽ Teams
+
+The implemented example contains six teams:
+
+```text
+Ahly
+Zamalek
+Pyramids
+Ismaily
+Masry
+Future
+```
+
+---
+
+# 📝 Match Results
+
+The system processes eight matches:
+
+```text
+Match #1: Ahly 2 - 1 Zamalek
+Match #2: Pyramids 2 - 1 Masry
+Match #3: Ismaily 1 - 0 Future
+Match #4: Ahly 2 - 0 Pyramids
+Match #5: Zamalek 2 - 1 Masry
+Match #6: Future 1 - 2 Ahly
+Match #7: Ismaily 0 - 1 Pyramids
+Match #8: Zamalek 2 - 0 Future
+```
+
+---
+
+# 📝 Match Details
+
+The system displays detailed information about goals scored in each match.
+
+Example:
+
+```text
+===== Match Details =====
+
+Match #1: Ahly 2 - 1 Zamalek
+  Mahmoud (Ahly) - 15'
+  Mohamed (Ahly) - 60'
+  Hashim (Zamalek) - 78'
+```
+
+The output identifies the **goal scorer** and the **minute of the goal**.
+
+---
+
+# 🏆 Final League Standings
+
+After processing the matches, the system generates the following standings:
+
+```text
+===== Soccer League Standings =====
+
+Team          Points    Goals For    Goals Against    Goal Difference
+Ahly          9         6            2                4
+Zamalek       6         5            3                2
+Pyramids      6         3            3                0
+Ismaily       3         1            1                0
+Masry         0         2            4                -2
+Future        0         1            5                -4
+```
+
+### 🥇 Current Leader
+
+```text
+Team: Ahly
+Points: 9
+Goals For: 6
+Goals Against: 2
+Goal Difference: +4
+```
+
+---
+
+# 📁 Project Structure
 
 ```text
 SoccerLeagueSystem/
@@ -349,92 +467,144 @@ SoccerLeagueSystem/
                         └── SoccerLeagueSystem.java
 ```
 
-## ▶️ How to Run
+---
 
-### 1. Clone the Repository
+# 💻 Technologies Used
+
+| Technology                  | Purpose                      |
+| --------------------------- | ---------------------------- |
+| Java                        | Application development      |
+| Object-Oriented Programming | System design                |
+| ArrayList                   | Collection management        |
+| Maven                       | Project build and management |
+| Apache NetBeans             | Development environment      |
+
+---
+
+# ▶️ How to Run
+
+## Prerequisites
+
+Make sure you have:
+
+* Java JDK installed
+* Apache Maven installed
+* Apache NetBeans, IntelliJ IDEA, or Eclipse
+
+## Using Maven
+
+Navigate to the project directory:
 
 ```bash
-git clone <YOUR-REPOSITORY-URL>
+cd SoccerLeagueSystem
 ```
 
-### 2. Open the Project
-
-Open the project using:
-
-* Apache NetBeans
-* IntelliJ IDEA
-* Eclipse
-
-### 3. Build the Project
-
-Using Maven:
+Compile the project:
 
 ```bash
 mvn clean compile
 ```
 
-### 4. Run the Application
+Run the application:
 
 ```bash
 mvn exec:java
 ```
 
-Or run the main class directly:
+You can also run the main class directly from your IDE:
 
 ```text
 SoccerLeagueSystem.java
 ```
 
-## ✅ Sample Execution
+---
 
-The application successfully processes the matches and produces the final standings.
+# ✅ Build & Execution
+
+The project was successfully compiled and executed using Maven.
 
 ```text
-===== Soccer League Standings =====
-
-Team          Points    Goals For    Goals Against    Goal Difference
-Ahly          9         6            2                4
-Zamalek       6         5            3                2
-Pyramids      6         3            3                0
-Ismaily       3         1            1                0
-Masry         0         2            4                -2
-Future        0         1            5                -4
+BUILD SUCCESS
+Total time: 0.920 s
 ```
 
-## 📚 Assignment Requirements
+The application successfully generated:
 
-The project satisfies the required five-class design:
+* Detailed match results
+* Goal scorer information
+* Goal minutes
+* Team statistics
+* Final league standings
 
-| Class      | Purpose                                                 |
-| ---------- | ------------------------------------------------------- |
-| `Player`   | Represents a soccer player                              |
-| `Team`     | Stores team information, players, and statistics        |
-| `Goal`     | Stores scorer, match ID, and goal minute                |
-| `Match`    | Stores two teams and match goals                        |
-| `Schedule` | Manages teams, matches, statistics, ranking, and output |
+---
 
-Collections are implemented using `ArrayList` as required.
+# 📚 Assignment Requirements
 
-## 🚀 Future Improvements
+The project follows the required five-class design:
+
+| Requirement                      | Status |
+| -------------------------------- | ------ |
+| `Player` class                   | ✅      |
+| `Team` class                     | ✅      |
+| `Goal` class                     | ✅      |
+| `Match` class                    | ✅      |
+| `Schedule` class                 | ✅      |
+| Team contains players            | ✅      |
+| Match contains two teams         | ✅      |
+| Match contains goals             | ✅      |
+| Goal contains match ID           | ✅      |
+| Goal contains scorer             | ✅      |
+| Goal contains scoring minute     | ✅      |
+| `ArrayList` used for collections | ✅      |
+| Team statistics                  | ✅      |
+| League ranking                   | ✅      |
+| Results table                    | ✅      |
+| Match details                    | ✅      |
+
+---
+
+# 🎓 Learning Outcomes
+
+This project demonstrates practical experience with:
+
+* Java class design
+* Object creation and relationships
+* Encapsulation
+* Composition
+* `ArrayList` collections
+* Constructors
+* Getters and setters
+* Object-oriented modeling
+* Processing match results
+* Updating team statistics
+* Ranking and displaying data
+* Building a structured Java application with Maven
+
+---
+
+# 🚀 Future Improvements
 
 Possible future enhancements include:
 
 * Add more teams and matches.
 * Add player statistics.
-* Add top goal scorer ranking.
-* Add yellow and red cards.
-* Add match dates and stadiums.
-* Add league search functionality.
+* Add top-scorer functionality.
+* Add match dates and stadium information.
+* Add additional match events.
 * Add a graphical user interface.
 * Store league data in a database.
-* Export standings to CSV or PDF.
-* Add automated unit tests.
+* Export standings and match reports.
+* Add automated unit testing.
 
-## 👨‍💻 Author
+---
+
+# 👨‍💻 Author
 
 **Mahmoud Bakri**
 
-Java | OOP | Software Testing & Quality Assurance
+Java | Object-Oriented Programming | Software Testing & Quality Assurance
+
+---
 
 ## 📄 License
 
