@@ -14,6 +14,8 @@ public class Team {
     private int goalsFor;
     private int goalsAgainst;
     private int points;
+    
+    // constactor
     public Team(String nameTeam, ArrayList<Player> players, int goalsFor, int goalsAgainst, int points) {
         this.nameTeam = nameTeam;
         this.players = players;
@@ -21,6 +23,7 @@ public class Team {
         this.goalsAgainst = goalsAgainst;
         this.points = points;
     }
+    
     //getter
     public String getNameTeam() {
         return nameTeam;
@@ -37,6 +40,7 @@ public class Team {
     public int getPoints() {
         return points;
     }
+    
     //setter
     public void setNameTeam(String nameTeam) {
         this.nameTeam = nameTeam;
@@ -53,9 +57,12 @@ public class Team {
     public void setPoints(int points) {
         this.points = points;
     }
+    
+    
     public void addPlayer(Player p) {
         players.add(p);
     }
+    
     @Override
     public String toString() {
         return "Team{" + "nameTeam=" + nameTeam + ", players=" + players + ", goalsFor=" + goalsFor + ", goalsAgainst=" + goalsAgainst + ", points=" + points + '}';

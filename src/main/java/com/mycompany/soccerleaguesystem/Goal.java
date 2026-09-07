@@ -12,11 +12,13 @@ public class Goal {
     private Player scorer;
     private int minute;
 
+    // constactor
     public Goal(int matchId, Player scorer, int minute) {
         this.matchId = matchId;
         this.scorer = scorer;
         this.minute = minute;
     }
+    
     //getter
     public int getMatchId() {
         return matchId;
@@ -27,6 +29,7 @@ public class Goal {
     public int getMinute() {
         return minute;
     }
+    
     //setter
     public void setMatchId(int matchId) {
         this.matchId = matchId;
@@ -37,8 +40,12 @@ public class Goal {
     public void setMinute(int minute) {
         this.minute = minute;
     }
+    
     @Override
     public String toString() {
         return "Goal{" + "matchId=" + matchId + ", scorer=" + scorer + ", minute=" + minute + '}';
     }
 }
+
+
+

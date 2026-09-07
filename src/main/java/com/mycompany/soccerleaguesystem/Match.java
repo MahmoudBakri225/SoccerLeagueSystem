@@ -15,6 +15,8 @@ public class Match {
     private ArrayList<Goal> Goals;
     private int homeScore;
     private int awayScore;
+    
+    // constactor
     public Match(int matchId, Team homeTeam, Team awayTeam, ArrayList<Goal> Goals, int homeScore, int awayScore) {
         this.matchId = matchId;
         this.homeTeam = homeTeam;
@@ -23,6 +25,7 @@ public class Match {
         this.homeScore = homeScore;
         this.awayScore = awayScore;
     }
+    
     //getter
     public int getMatchId() {
         return matchId;
@@ -42,6 +45,7 @@ public class Match {
     public int getAwayScore() {
         return awayScore;
     }
+    
     //setter
     public void setMatchId(int matchId) {
         this.matchId = matchId;
@@ -61,6 +65,7 @@ public class Match {
     public void setAwayScore(int awayScore) {
         this.awayScore = awayScore;
     }
+    
     public void addGoal(Goal g) {
         Goals.add(g);
         if (g.getscorer().getTeam() == homeTeam) {
@@ -69,6 +74,7 @@ public class Match {
             awayScore = awayScore + 1;
         }
     }
+    
     @Override
     public String toString() {
         return "Match{" + "matchId=" + matchId + ", homeTeam=" + homeTeam + ", awayTeam=" + awayTeam + ", Goals=" + Goals + ", homeScore=" + homeScore + ", awayScore=" + awayScore + '}';

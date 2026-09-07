@@ -13,13 +13,14 @@ public class Player {
     private Team team;
     
     
-// constactor
+    // constactor
     public Player(String name, int number, Team team) {
         this.name = name;
         this.number = number;
         this.team = team;
     }
-// getter
+    
+    // getter
     public String getName() {
         return name;
     }
@@ -29,6 +30,7 @@ public class Player {
     public Team getTeam() {
         return team;
     }
+    
     //setter
     public void setName(String name) {
         this.name = name;
@@ -39,6 +41,7 @@ public class Player {
     public void setTeam(Team Team) {
         this.team = Team;
     }
+    
     @Override
     public String toString() {
         return "Player{" + "name=" + name + ", number=" + number + ", Team=" + team + '}';
