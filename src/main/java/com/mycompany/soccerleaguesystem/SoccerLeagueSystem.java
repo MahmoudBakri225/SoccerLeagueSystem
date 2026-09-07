@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * @author KA
  */
 public class SoccerLeagueSystem {
-//A Java OOP-based Soccer League Management System that manages teams, players, matches, and goals, calculates team statistics and points, ranks teams, and displays league standings and match details.
     public static void main(String[] args) {
 
         // create schedule
@@ -37,9 +36,9 @@ public class SoccerLeagueSystem {
         Player p2 = new Player("Mohamed", 7, teamA);
         Player p3 = new Player("Hashim", 9, teamB);
         Player p4 = new Player("ElSayed", 11, teamB);
-        Player p5 = new Player("Fiston", 9, teamC);
-        Player p6 = new Player("Ramadan", 10, teamD);
-        Player p7 = new Player("Shika", 8, teamE);
+        Player p5 = new Player("Nazeh", 9, teamC);
+        Player p6 = new Player("Makwey", 10, teamD);
+        Player p7 = new Player("Nader", 8, teamE);
         Player p8 = new Player("Ali", 9, teamF);
 
         teamA.addPlayer(p1);

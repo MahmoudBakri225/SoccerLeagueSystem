@@ -111,12 +111,7 @@ public class Schedule {
         for (Team t : Teams) {
             int goalDifference = t.getGoalsFor() - t.getGoalsAgainst();
 
-            System.out.printf("%-13s %-8d %-12d %-16d %d%n",
-                    t.getNameTeam(),
-                    t.getPoints(),
-                    t.getGoalsFor(),
-                    t.getGoalsAgainst(),
-                    goalDifference);
+            System.out.printf("%-13s %-8d %-12d %-16d %d%n", t.getNameTeam(), t.getPoints(), t.getGoalsFor(), t.getGoalsAgainst(), goalDifference);
         }
 
         System.out.println("-------------------------------------------------------------------");
