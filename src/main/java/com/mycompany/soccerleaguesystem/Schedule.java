@@ -10,6 +10,7 @@ public class Schedule {
     private ArrayList<Team> Teams;
     private int nextMatchId;
 
+    
     // constructor
     public Schedule(ArrayList<Match> Matchs, ArrayList<Team> Teams, int nextMatchId) {
         this.Matchs = Matchs;

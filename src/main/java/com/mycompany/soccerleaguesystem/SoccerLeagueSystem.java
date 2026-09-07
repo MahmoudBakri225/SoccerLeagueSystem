@@ -2,8 +2,8 @@ package com.mycompany.soccerleaguesystem;
 
 import java.util.ArrayList;
 
-
 public class SoccerLeagueSystem {
+
     public static void main(String[] args) {
 
         // create schedule
@@ -92,31 +92,29 @@ public class SoccerLeagueSystem {
         schedule.recordGoal(match8, p3, 5);
         schedule.recordGoal(match8, p4, 33);
         schedule.updateTeamStatistics(match8);
-        
-        
+
         // print match details
         System.out.println("\n===== Match Details =====");
         schedule.printMatchDetails(match1);
 
         System.out.println();
         schedule.printMatchDetails(match2);
-        
+
         System.out.println();
         schedule.printMatchDetails(match3);
-        
+
         System.out.println();
         schedule.printMatchDetails(match4);
 
         System.out.println();
         schedule.printMatchDetails(match5);
-        
-        
+
         System.out.println();
         schedule.printMatchDetails(match6);
-        
+
         System.out.println();
         schedule.printMatchDetails(match7);
-        
+
         System.out.println();
         schedule.printMatchDetails(match8);
 
@@ -124,7 +122,6 @@ public class SoccerLeagueSystem {
         System.out.println("===== Soccer League Standings =====");
         schedule.printStandingsTable();
 
-        
     }
 
 }
